@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var reviews_data = JSON.parse(fs.readFileSync("reviews.json", 'utf8'));
 var dealerships_data = JSON.parse(fs.readFileSync("dealerships.json", 'utf8'));
 
-mongoose.connect("mongodb://mongo_db:27017/", { 'dbName': 'dealershipsDB' });
+mongoose.connect("mongodb://mongo_db:27017/", { dbName: 'dealershipsDB' });
 
 var Reviews = require('./review');
 var Dealerships = require('./dealership');
@@ -109,14 +109,14 @@ app.post('/insert_review', bodyParser.raw({ type: '*/*' }), function(req, res) {
             var new_id = documents[0].id + 1;
             var review = new Reviews({
                 id: new_id,
-                name: data['name'],
-                dealership: data['dealership'],
-                review: data['review'],
-                purchase: data['purchase'],
-                purchase_date: data['purchase_date'],
-                car_make: data['car_make'],
-                car_model: data['car_model'],
-                car_year: data['car_year']
+                name: data.name,
+                dealership: data.dealership,
+                review: data.review,
+                purchase: data.purchase,
+                purchase_date: data.purchase_date,
+                car_make: data.car_make,
+                car_model: data.car_model,
+                car_year: data.car_year
             });
 
             review.save(function(err2, savedReview) {
